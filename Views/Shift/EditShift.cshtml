@@ -1,0 +1,41 @@
+﻿@model CheckListJob.Models.ListShift
+@Html.ValidationSummary(true)
+
+<h2>Изменить задачу с номером @Model.Id</h2>
+
+@using (Html.BeginForm("EditShift", "Shift", FormMethod.Post))
+{
+    <div class="form-row">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Status)
+        <div class="m-3 form-group col-md-6">
+            @Html.LabelFor(m => m.Name, "Название:", new { @class = "mb-2" })
+            @Html.TextBoxFor(m => m.Name, new { type = "text", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="m-2 form-group col-md-6">
+            @Html.LabelFor(m => m.Description, "Описание:", new { @class = "mb-2" })
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+        <div class="m-2 form-group col-md-6">
+            @Html.LabelFor(m => m.StartTime, "Начало:", new { @class = "mb-2" })
+            @Html.TextBoxFor(model => model.StartTime, new { type = "time", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.StartTime)
+        </div>
+        <div class="m-2 form-group col-md-6">
+            @Html.LabelFor(m => m.FinishTime, "Конец:", new { @class = "mb-2" })
+            @Html.TextBoxFor(model => model.FinishTime, new { type = "time", @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FinishTime)
+        </div>
+        <div class="m-2 form-group col-md-6">
+            @Html.LabelFor(m => m.ShiftId, "Смена:", new { @class = "mb-2" })
+            @Html.DropDownListFor(model => model.ShiftId, (SelectList)ViewBag.Shifts, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ShiftId)
+        </div>
+        <div class="m-3 form-group col-md-6">
+            <input type="submit" class="btn btn-primary" value="Сохранить" />
+        </div>
+    </div>
+}
+
