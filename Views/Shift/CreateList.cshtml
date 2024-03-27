@@ -1,9 +1,11 @@
-﻿@model CheckListJob.Models.ListShift
+﻿@model CheckListJob.Models.ShiftTask
 @Html.ValidationSummary(true)
 
+<br />
+<h4 class="text-success">@TempData["Review"]</h4>
 <h2>Добавить задачу</h2>
 
-@using (Html.BeginForm("CreateList", "Home", FormMethod.Post))
+@using (Html.BeginForm("CreateList", "Shift", FormMethod.Post))
 {
     <div class="form-row">
         <div class="m-3 form-group col-md-6">

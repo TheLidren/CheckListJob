@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+
 namespace CheckListJob
 {
     public class Program
@@ -13,12 +15,16 @@ namespace CheckListJob
                 {
                     options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(_ => "Данное поле не должно быть пустым");
                 });
+            builder.Services.AddAuthentication("Cookies")
+                .AddCookie(options => options.LoginPath = "/User/SignIn");
+            builder.Services.AddAuthorization();
             
             var app = builder.Build();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthorization();
             app.UseAuthorization();
 
             app.MapControllerRoute(

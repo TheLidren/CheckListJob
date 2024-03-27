@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ListLog>
+
+<div class="container">
+    <table class="table fs-5">
+        <thead>
+            <tr class="">
+                <th scope="col-5">Задание</th>
+                <th scope="col-5">Смена</th>
+                <th scope="col-1">Логин</th>
+                <th scope="col-1">Время</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ShiftTask.Name</td>
+                    <td>@item.ShiftTask.Shift.Name</td>
+                    <td>@item.User.Email</td>
+                    <td>@item.MarkAction.ToString("dd-mm-yyyy hh:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -10,8 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand navbar-light border-bottom box-shadow pb-0 pt-0">
-            <div class="container-fluid align-content-center">
+        <nav class="navbar navbar-expand navbar-light border-bottom box-shadow pb-0 pt-0 ps-3 pe-4">
                 <a class="navbar-brand" asp-controller="Home" asp-action="WelcomeIndex">Смены</a>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav">
@@ -22,20 +21,35 @@
                         <li class="nav-item">
                             <a class="nav-link fs-5 disabled" aria-disabled="true" asp-area="" asp-controller="Shift" asp-action="ListShift" asp-route-shiftId="1">4 смена</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link fs-5 dropdown-toggle text-black" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Разработчик
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item text-black" asp-controller="Home" asp-action="CreateList">Добавить задачу</a></li>
-                                <li><a class="dropdown-item text-black" href="#">Список пользователей</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-black" href="#">Журнал</a></li>
-                            </ul>
-                        </li>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link fs-5 dropdown-toggle text-black" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Разработчик
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item text-black" asp-controller="Shift" asp-action="CreateList">Добавить задачу</a></li>
+                                    <li><a class="dropdown-item text-black" asp-controller="Shift" asp-action="AdminShift">Админ панель</a></li>
+                                    <li><a class="dropdown-item text-black" asp-controller="User" asp-action="ListUser">Список пользователей</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-black" asp-controller="Shift" asp-action="JournalAction">Журнал</a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                 </div>
-            </div>
+                <div class="text-end dropdown">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="nav-link fs-5 dropdown-toggle text-black" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Аккаунт
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item text-black" asp-controller="User" asp-action="EditPassword">Изменить пароль</a></li>
+                            <li><a class="dropdown-item text-black" asp-controller="User" asp-action="SignOut">Выйти</a></li>
+                        </ul>
+                    }
+                </div>
         </nav>
     </header>
     <div class="container-fluid">

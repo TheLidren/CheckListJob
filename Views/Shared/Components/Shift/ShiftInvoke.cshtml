@@ -1,6 +1,7 @@
-﻿@foreach (var item in ViewBag.Shifts)
+﻿
+@foreach (var item in ViewBag.Shifts)
 {
     <li class="nav-item">
-        <a class="nav-link fs-5 text-dark" asp-area="" asp-controller="Shift" asp-action="ListShift" asp-route-shiftId="@item.Id">@item.Tittle</a>
+        <a class="nav-link fs-5 text-dark" asp-area="" asp-controller="Shift" asp-action="ListShift" asp-route-shiftId="@item.Id">@item.Name</a>
     </li>
 }

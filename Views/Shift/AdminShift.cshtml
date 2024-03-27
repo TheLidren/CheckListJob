@@ -1,21 +1,18 @@
 ﻿@model IEnumerable<CheckListJob.Models.ShiftTask>
-<meta http-equiv="refresh" content="10" />
 <div class="m-5">
     <table class="table table-bordered fs-5">
-        <tr align="center row">
-            <th class="col-1"></th>
+        <tr class="text-center">
             <th class="col-3">Название</th>
             <th class="col-5">Описание</th>
             <th class="col-1">Время до</th>
             <th class="col-1">Время после</th>
+            <th></th>
+            <th>Архив</th>
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.ActionLink("Выполнил", "CompleteTask", "Shift", new { taskId = item.Id, shiftId = ViewData["shiftId"] }, new { @class = "btn btn-success w-100 m-0" })
-                </td>
                 <td>
                     @item.Name
                 </td>
@@ -27,6 +24,21 @@
                 </td>
                 <td align="center">
                     @item.FinishTime.ToString(@"hh\:mm")
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("Редактировать", "EditShift", "Shift", new { shiftId = item.Id }, new { @class = "btn btn-primary w-100 m-0" })
+                </td>
+                <td class="text-center">
+                    @if (!item.Status)
+                    {
+
+                        <input class="form-check-input" type="checkbox" onclick='document.location.replace("/Shift/DeleteShift?shiftId=@item.Id")' checked />
+
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="checkbox" onclick='document.location.replace("/Shift/DeleteShift?shiftId=@item.Id")' />
+                    }
                 </td>
             </tr>
         }

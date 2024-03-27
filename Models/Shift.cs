@@ -3,9 +3,9 @@
     public class Shift
     {
         public int Id { get; set; }
-        public string Tittle { get; set; }
+        public string Name { get; set; }
 
-        public ICollection<ListShift>? Lists { get; set; }
+        public ICollection<ShiftTask>? ShiftTasks { get; set; }
 
     }
 }

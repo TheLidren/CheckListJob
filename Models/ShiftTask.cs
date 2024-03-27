@@ -2,9 +2,9 @@
 
 namespace CheckListJob.Models
 {
-    public class ListShift
+    public class ShiftTask
     {
-        public Int16 Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Данное поле не должно быть пустым")]
         [StringLength(50, ErrorMessage = "Введите корректно размерность", MinimumLength = 2)]
@@ -20,9 +20,12 @@ namespace CheckListJob.Models
         public TimeSpan FinishTime { get; set; }
 
         [Required(ErrorMessage = "Данное поле не должно быть пустым")]
-        public int ShiftId { get; set; }
+        public int? ShiftId { get; set; }
         public Shift? Shift { get; set; }
         public bool Status { get; set; }
+
+        
+        public DateTime? LastAction { get; set; }
 
         public ICollection<ListLog>? ListLogs { get; set; }
 
